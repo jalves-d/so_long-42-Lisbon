@@ -40,6 +40,7 @@ void	move(t_drgame *drgame, int keypressed)
 	int i;
 
 	i = -1;
+	map = (drgame)->map;
 	if (keypressed == 115)
 		--(*map);
 	if (keypressed == 100)

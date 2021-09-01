@@ -40,19 +40,19 @@ void	solong(int argc, char **argv, t_drgame *drgame)
 	sizename = ft_strlen(argv[1]);
 	if (argc < 3)
 	{
-		if (argv[1][sizename] == 'r' && argv[1][sizename - 1] == 'e' && argv[1][sizename - 2] == 'b' &&
-				argv[1][sizename - 3] == '.')
-	   		validmap(drgame, argv[1]);
+		if (argv[1][sizename - 1] == 'r' && argv[1][sizename - 2] == 'e' && argv[1][sizename - 3] == 'b' &&
+				argv[1][sizename - 4] == '.')
+	   		validmap(argv[1], drgame);
 		else
 		{
 			write(1, "Error \n", 8);
-			exit(0);
+			exit(1);
 		}
 	}
 	else
 	{
 		write(1, "Error \n", 8);
-		exit(0);
+		exit(1);
 	}
 }
 int	main(int argc, char **argv)

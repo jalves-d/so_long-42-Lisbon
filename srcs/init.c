@@ -19,7 +19,6 @@ void	drawmapitens(t_drgame *drgame, int x, int y, int z)
 
 void	drawimgs(t_drgame *drgame, void *pximg, int x, int y)
 {
-	unsigned int	color;
 	int				i;
 	int				j;
 
@@ -29,7 +28,7 @@ void	drawimgs(t_drgame *drgame, void *pximg, int x, int y)
 		i = 0;
 		while (i < 40)
 		{
-			mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win , pximg, j, i);
+			mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win , pximg, j * x, i * y);
 			i++;
 		}
 		j++;
@@ -56,5 +55,5 @@ void	initmap(t_drgame *drgame)
 		drgame->y++;
 		drgame->numb = drgame->lnchars * drgame->y;
 	}
-	mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win, drgame->mlx.mlx_img, 0, 0);
+	mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win, drgame->mlx_img, 0, 0);
 }

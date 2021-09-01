@@ -7,7 +7,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
+# include "get_next_line.h"
 
 typedef struct s_mlx
 {

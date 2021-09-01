@@ -3,7 +3,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 NAME = so_long
 
 SRCS = srcs/main.c srcs/init.c srcs/key_hook.c \
-	srcs/utils.c srcs/valid.c
+	srcs/utils.c srcs/valid.c srcs/get_next_line.c srcs/get_next_line_utils.c
 
 OBJS = $(SRCS:.c=.o)
 
