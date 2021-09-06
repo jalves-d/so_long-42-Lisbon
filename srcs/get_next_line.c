@@ -6,13 +6,13 @@
 /*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 15:12:12 by jalves-d          #+#    #+#             */
-/*   Updated: 2021/09/01 15:34:19 by jalves-d         ###   ########.fr       */
+/*   Updated: 2021/09/06 17:36:03 by jalves-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-unsigned int		checkchar(char *src, int c)
+unsigned int	checkchar(char *src, int c)
 {
 	unsigned int	i;
 
@@ -28,7 +28,7 @@ unsigned int		checkchar(char *src, int c)
 	return (0);
 }
 
-char				*ft_subnstr(char *save)
+char	*ft_subnstr(char *save)
 {
 	int		i;
 	char	*line;
@@ -38,7 +38,8 @@ char				*ft_subnstr(char *save)
 	i = 0;
 	while (save[i] && save[i] != '\n')
 		i++;
-	if (!(line = (char *)malloc(sizeof(char) * (i + 1))))
+	line = (char *)malloc(sizeof(char) * (i + 1));
+	if (!line)
 		return (NULL);
 	i = 0;
 	while (save[i] && save[i] != '\n')
@@ -50,7 +51,7 @@ char				*ft_subnstr(char *save)
 	return (line);
 }
 
-char				*ft_subastr(char *save)
+char	*ft_subastr(char *save)
 {
 	int		i;
 	int		j;
@@ -77,7 +78,7 @@ char				*ft_subastr(char *save)
 	return (s);
 }
 
-int					get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	char		*buf;
 	static char	*save[1024];

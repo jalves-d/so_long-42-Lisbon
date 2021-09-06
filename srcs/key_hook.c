@@ -1,106 +1,118 @@
-
 #include "../includes/solong.h"
 
-int	exitgame(t_drgame *drgame)
+int	havec(t_drgame *drgame)
 {
-	free(drgame->map);
-	exit(1);
-}
-
-void movet (t_drgame *drgame, char *map, int keypressed, int i)
-{
-	if (keypressed == 115)
-	{
-		*++map = '0';
-		*--map = 'P';
-	}
-	if (keypressed == 100)
-	{
-		*--map = '0';
-		*++map = 'P';
-	}
-	if (keypressed == 119)
-	{
-		*map = 'P';
-		while (--i >= 0)
-			++map;
-		*map = '0';
-	}
-	if (keypressed == 97)
-	{
-		*map = 'P';
-		map = ft_strchr(drgame->map, 'P');
-		*map = '0';
-	}
-}
-
-void	move(t_drgame *drgame, int keypressed)
-{
-	char	*map;
-	int i;
-
-	i = -1;
-	map = (drgame)->map;
-	if (keypressed == 115)
-		--(*map);
-	if (keypressed == 100)
-		++(*map);
-	if (keypressed == 119)
-		while (++i < drgame->lnchars)
-			--(*map);
-	if (keypressed == 97)
-		while (++i < drgame->lnchars)
-			++(*map);
-	map = ft_strchr(drgame->map, 'P');
-	if (*map != '1' && *map != 'E')
-	{
-		movet(drgame, map, keypressed, i);
-		drgame->move += 1;
-		ft_putnbr_fd(drgame->move, 1);
-		write(1, "\n", 1);
-	}
-	mlx_destroy_image(drgame->mlx.mlx, drgame->player);
-}
-
-void	checkdoor(t_drgame *drgame)
-{
-	int	count;
 	int	i;
 
-	count = 0;
 	i = 0;
-	if (!(ft_strchr(drgame->map, 'E')))
+	while (drgame->map[i])
 	{
-		if (drgame->numexit <= 1)
-			if (!(ft_strchr(drgame->map, 'X')))
-				exitgame(drgame);
-		while (drgame->map[i])
-		{
-			if (drgame->map[i] == 'X')
-				count++;
-			i++;
-		}
-		if (count == drgame->numexit - 1)
-			exitgame(drgame);
+		if (drgame->map[i] == 'C')
+			return (1);
+		i++;
 	}
+	return (0);
+}
+
+void	moved(int key, t_drgame	*drgame, int pos)
+{
+	if (key == D)
+	{
+		if (drgame->map[pos + 1] == 'E' && !havec(drgame))
+		{	
+			drgame->map[pos + 1] = 'P';
+			drgame->map[pos] = '0';
+			exitgame(drgame);
+		}
+		else if (drgame->map[pos + 1] != '1' && drgame->map[pos + 1] != 'E')
+		{
+			drgame->map[pos] = '0';
+			drgame->lastitem = drgame->map[pos + 1];
+			drgame->map[pos + 1] = 'P';
+		}
+	}
+}
+
+void	movea(int key, t_drgame	*drgame, int pos)
+{
+	if (key == A)
+	{
+		if (drgame->map[pos - 1] == 'E' && !havec(drgame))
+		{
+			drgame->map[pos - 1] = 'P';
+			drgame->map[pos] = '0';
+			exitgame(drgame);
+		}
+		else if (drgame->map[pos - 1] != '1' && drgame->map[pos - 1] != 'E')
+		{
+			drgame->map[pos] = '0';
+			drgame->lastitem = drgame->map[pos - 1];
+			drgame->map[pos - 1] = 'P';
+		}
+	}
+	else
+		moved(key, drgame, pos);
+}
+
+void	moves(int key, t_drgame *drgame, int pos)
+{
+	if (key == S)
+	{
+		if (drgame->map[pos + drgame->lnchars] == 'E' && !havec(drgame))
+		{
+			drgame->map[pos + drgame->lnchars] = 'P';
+			drgame->map[pos] = '0';
+			exitgame(drgame);
+		}
+		else if (drgame->map[pos + drgame->lnchars] != '1' && drgame->map[pos + drgame->lnchars] != 'E')
+		{
+			drgame->map[pos] = '0';
+			drgame->lastitem = drgame->map[pos + drgame->lnchars];
+			drgame->map[pos + drgame->lnchars] = 'P';
+		}
+	}
+	else
+		movea(key, drgame, pos);
+}
+
+void	movew(int key, t_drgame *drgame)
+{
+	int	pos;
+
+	pos = 0;
+	while (drgame->map[pos] != 'P')
+		pos++;
+	if (key == W)
+	{
+		if (drgame->map[pos - drgame->lnchars] == 'E' && !havec(drgame))
+		{
+			drgame->map[pos - drgame->lnchars] = 'P';
+			drgame->map[pos] = '0';
+			exitgame(drgame);
+		}
+		else if (drgame->map[pos - drgame->lnchars] != '1' && drgame->map[pos - drgame->lnchars] != 'E')
+		{
+			drgame->map[pos] = '0';
+			drgame->lastitem = drgame->map[pos - drgame->lnchars];
+			drgame->map[pos - drgame->lnchars] = 'P';
+		}
+	}
+	else
+		moves(key, drgame, pos);
 }
 
 int	key_hook(int key, t_drgame *drgame)
 {
-	if (!(ft_strchr(drgame->map, 'C')))
-	{
-		while (ft_strchr(drgame->map, 'E'))
-		{
-			drgame->numexit++;
-			*ft_strchr(drgame->map, 'E') = 'X';
-		}
-	}
-	if (key == 119 || key == 97 || key == 100 || key == 115)
-		move(drgame, key);
-	if (key == 65307)
+	if (key == ESC)
 		exitgame(drgame);
-	drimg(drgame, &drgame->player, "./img/personagem.xpm");
-	checkdoor(drgame);
+	if (key == W || key == S || key == A || key == D)
+		movew(key, drgame);
+	mlx_destroy_image(drgame->mlx.mlx, drgame->mlx.mlx_img);
+	drgame->mlx.mlx_img = mlx_new_image(drgame->mlx.mlx, drgame->width, drgame->height);
+	drgame->y = 0;
+	drgame->x = -40;
+	drgame->numb = 0;
+	drgame->addr = NULL;
 	initmap(drgame);
 	return (1);
 }

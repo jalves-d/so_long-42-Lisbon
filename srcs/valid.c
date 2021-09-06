@@ -1,4 +1,3 @@
-
 #include "../includes/solong.h"
 
 void	validmapitens(char *mapchars)
@@ -82,11 +81,11 @@ void	validwalls(char *line)
 
 void	validmap(char *map, t_drgame *drgame)
 {
-	char* line;
-	int vergnl;
-	char *mapchars;
+	char	*line;
+	int		vergnl;
+	char	*mapchars;
 
-	mapchars = malloc(sizeof(char*) * 10000);
+	mapchars = malloc(sizeof(char *) * 10000);
 	*mapchars = 0;
 	line = 0;
 	drgame->fd = open(map, O_RDONLY);

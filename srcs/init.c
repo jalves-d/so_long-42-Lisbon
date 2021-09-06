@@ -1,7 +1,6 @@
+#	include "../includes/solong.h"
 
-# include "../includes/solong.h"
-
-void errormessage()
+void	errormessage(void)
 {
 	write(1, "Error !\n", 8);
 	exit(1);
@@ -9,51 +8,48 @@ void errormessage()
 
 void	drawmapitens(t_drgame *drgame, int x, int y, int z)
 {
+	if (drgame->map[z + drgame->numb] == '0')
+		drawimgs(drgame, drgame->ground, x, y);
 	if (drgame->map[z + drgame->numb] == 'P')
-		drawimgs(drgame, drgame->player, x, y * 39);
+		drawimgs(drgame, drgame->player, x, y);
 	if (drgame->map[z + drgame->numb] == 'C')
-		drawimgs(drgame, drgame->sword, x, y * 39);
-	if (drgame->map[z + drgame->numb] == 'E' || drgame->map[z + drgame->numb] == 'X')
-		drawimgs(drgame, drgame->exit, x, y * 39);
+		drawimgs(drgame, drgame->sword, x, y);
+	if (drgame->map[z + drgame->numb] == 'E')
+		drawimgs(drgame, drgame->exit, x, y);
 }
 
-void	drawimgs(t_drgame *drgame, void *pximg, int x, int y)
+void	drawimgs(t_drgame *drgame, char *imgname, int x, int y)
 {
-	int				i;
-	int				j;
+	int	width;
+	int	height;
 
-	j = 0;
-	while (j < 40)
-	{
-		i = 0;
-		while (i < 40)
-		{
-			mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win , pximg, j * x, i * y);
-			i++;
-		}
-		j++;
-	}
+	drgame->addr = mlx_get_data_addr(drgame->mlx.mlx_img, &drgame->bpp, &drgame->linenum, &drgame->numexit);
+	drgame->mlx.mlx_img = mlx_xpm_file_to_image(drgame->mlx.mlx, imgname, &width, &height);
+	if (!(drgame->mlx.mlx_img))
+		write(2, "IMG Error !", 12);
+	mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win, drgame->mlx.mlx_img, x, y);
 }
 
 void	initmap(t_drgame *drgame)
 {
 	int	init;
 
-	while (drgame->y < (drgame->linenum - 1))
+	while (drgame->y < ((drgame->linenum - 1) * 40))
 	{
-		init = -1;
-		while (init++ < drgame->lnchars)
+		init = 0;
+		while (init < drgame->lnchars)
 		{
-			if(drgame->map[init + drgame->numb] != '1')
+			if (drgame->map[init + drgame->numb] != '1')
 			{
-				drawimgs(drgame, drgame->ground, drgame->x += 40, drgame->y * 39);
+				drgame->x += 40;
 				drawmapitens(drgame, drgame->x, drgame->y, init);
 			}
 			else
-				drawimgs(drgame, drgame->tree, drgame->x += 40, drgame->y * 39);
+				drawimgs(drgame, drgame->tree, drgame->x += 40, drgame->y);
+			init++;
 		}
-		drgame->y++;
-		drgame->numb = drgame->lnchars * drgame->y;
+		drgame->x = -40;
+		drgame->y += 40;
+		drgame->numb += drgame->lnchars;
 	}
-	mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win, drgame->mlx_img, 0, 0);
 }

@@ -23,12 +23,15 @@ typedef struct s_drgame
 	int		width;
 	int		height;
 	int		move;
-	void	*ground;
-	void	*player;
-	void	*sword;
-	void	*tree;
-	void	*exit;
+	int 	bpp;
+	char	*addr;
+	char	*ground;
+	char	*player;
+	char	*sword;
+	char	*tree;
+	char	*exit;
 	char	*map;
+	int 	lastitem;
 	int		lnchars;
 	int		linenum;
 	char	*player_position;
@@ -40,9 +43,14 @@ typedef struct s_drgame
 	int		y;
 }				t_drgame;
 
+# define W 13
+# define S 1
+# define A 0
+# define D 2
+# define ESC 53
+
 void	solong(int argc, char **argv, t_drgame *drgame);
 void	drgamedatas(t_drgame *drgame);
-void	drimg(t_drgame *drgame, void **pximg, char *imgname);
 int	windowsize(t_drgame *drgame);
 char	*ft_strchr(const char *str, int c);
 size_t	ft_strlcpy(char *dest, char *src, size_t size);
@@ -50,13 +58,14 @@ char	*ft_strcat(char *dest, const char *src);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putchar_fd(char c, int fd);
 int	exitgame(t_drgame *drgame);
-void	movet (t_drgame *drgame, char *map, int keypressed, int i);
-void	move(t_drgame *drgame, int keypressed);
-void	checkdoor(t_drgame *drgame);
+void	moved(int key, t_drgame	*drgame, int pos);
+void	movea(int key, t_drgame	*drgame, int pos);
+void	movew(int key, t_drgame *drgame);
+void	moves(int key, t_drgame *drgame, int pos);
 int	key_hook(int key, t_drgame *drgame);
 void	errormessage();
 void	drawmapitens(t_drgame *drgame, int x, int y, int z);
-void	drawimgs(t_drgame *drgame, void *pximg, int x, int y);
+void	drawimgs(t_drgame *drgame, char *imgname, int x, int y);
 void	initmap(t_drgame *drgame);
 void	validmapitens(char *mapchars);
 void	validmaps(t_drgame *drgame, char *mapchars);

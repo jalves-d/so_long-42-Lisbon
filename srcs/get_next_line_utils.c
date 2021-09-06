@@ -6,7 +6,7 @@
 /*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 15:11:14 by jalves-d          #+#    #+#             */
-/*   Updated: 2021/09/01 15:34:35 by jalves-d         ###   ########.fr       */
+/*   Updated: 2021/09/06 17:33:56 by jalves-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-char			*ft_strdup(char *s)
+char	*ft_strdup(char *s)
 {
 	int		i;
 	char	*dst;
@@ -41,7 +41,7 @@ char			*ft_strdup(char *s)
 	return (dst);
 }
 
-char			*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
