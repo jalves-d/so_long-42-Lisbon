@@ -8,6 +8,8 @@ void	moved(int key, t_drgame	*drgame, int pos)
 		{
 			drgame->map[pos + 1] = 'P';
 			drgame->map[pos] = '0';
+			drgame->move++;
+			ft_putnbr(drgame->move, 1);
 			exitgame(drgame);
 		}
 		else if (drgame->map[pos + 1] != '1' && drgame->map[pos + 1] != 'E')
@@ -15,6 +17,8 @@ void	moved(int key, t_drgame	*drgame, int pos)
 			drgame->map[pos] = '0';
 			drgame->lastitem = drgame->map[pos + 1];
 			drgame->map[pos + 1] = 'P';
+			drgame->move++;
+			ft_putnbr(drgame->move, 1);
 		}
 	}
 }
@@ -27,6 +31,8 @@ void	movea(int key, t_drgame	*drgame, int pos)
 		{
 			drgame->map[pos - 1] = 'P';
 			drgame->map[pos] = '0';
+			drgame->move++;
+			ft_putnbr(drgame->move, 1);
 			exitgame(drgame);
 		}
 		else if (drgame->map[pos - 1] != '1' && drgame->map[pos - 1] != 'E')
@@ -34,6 +40,8 @@ void	movea(int key, t_drgame	*drgame, int pos)
 			drgame->map[pos] = '0';
 			drgame->lastitem = drgame->map[pos - 1];
 			drgame->map[pos - 1] = 'P';
+			drgame->move++;
+			ft_putnbr(drgame->move, 1);
 		}
 	}
 	else
@@ -48,6 +56,8 @@ void	moves(int key, t_drgame *dr, int pos)
 		{
 			dr->map[pos + dr->lnchars] = 'P';
 			dr->map[pos] = '0';
+			dr->move++;
+			ft_putnbr(dr->move, 1);
 			exitgame(dr);
 		}
 		else if (dr->map[pos + dr->lnchars] != '1' && dr->map[pos + dr->lnchars] != 'E')
@@ -55,6 +65,8 @@ void	moves(int key, t_drgame *dr, int pos)
 			dr->map[pos] = '0';
 			dr->lastitem = dr->map[pos + dr->lnchars];
 			dr->map[pos + dr->lnchars] = 'P';
+			dr->move++;
+			ft_putnbr(dr->move, 1);
 		}
 	}
 	else
@@ -74,6 +86,8 @@ void	movew(int key, t_drgame *dr)
 		{
 			dr->map[pos - dr->lnchars] = 'P';
 			dr->map[pos] = '0';
+			dr->move++;
+			ft_putnbr(dr->move, 1);
 			exitgame(dr);
 		}
 		else if (dr->map[pos - dr->lnchars] != '1' && dr->map[pos - dr->lnchars] != 'E')
@@ -81,6 +95,8 @@ void	movew(int key, t_drgame *dr)
 			dr->map[pos] = '0';
 			dr->lastitem = dr->map[pos - dr->lnchars];
 			dr->map[pos - dr->lnchars] = 'P';
+			dr->move++;
+			ft_putnbr(dr->move, 1);
 		}
 	}
 	else
