@@ -1,5 +1,19 @@
 #	include "../includes/solong.h"
 
+int	havec(t_drgame *drgame)
+{
+	int	i;
+
+	i = 0;
+	while (drgame->map[i])
+	{
+		if (drgame->map[i] == 'C')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void	errormessage(void)
 {
 	write(1, "Error !\n", 8);
@@ -18,16 +32,16 @@ void	drawmapitens(t_drgame *drgame, int x, int y, int z)
 		drawimgs(drgame, drgame->exit, x, y);
 }
 
-void	drawimgs(t_drgame *drgame, char *imgname, int x, int y)
+void	drawimgs(t_drgame *dr, char *imgname, int x, int y)
 {
 	int	width;
 	int	height;
 
-	drgame->addr = mlx_get_data_addr(drgame->mlx.mlx_img, &drgame->bpp, &drgame->linenum, &drgame->numexit);
-	drgame->mlx.mlx_img = mlx_xpm_file_to_image(drgame->mlx.mlx, imgname, &width, &height);
-	if (!(drgame->mlx.mlx_img))
+	dr->addr = mlx_get_data_addr(dr->mlx.mlx_img, &dr->bpp, &dr->linenum, &dr->numexit);
+	dr->mlx.mlx_img = mlx_xpm_file_to_image(dr->mlx.mlx, imgname, &width, &height);
+	if (!(dr->mlx.mlx_img))
 		write(2, "IMG Error !", 12);
-	mlx_put_image_to_window(drgame->mlx.mlx, drgame->mlx.mlx_win, drgame->mlx.mlx_img, x, y);
+	mlx_put_image_to_window(dr->mlx.mlx, dr->mlx.mlx_win, dr->mlx.mlx_img, x, y);
 }
 
 void	initmap(t_drgame *drgame)

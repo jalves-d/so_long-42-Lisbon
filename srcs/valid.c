@@ -11,12 +11,13 @@ void	validmapitens(char *mapchars)
 	{
 		if (mapchars[i] == 'P')
 			player++;
-		if ((mapchars[i] != '1') && (mapchars[i] != '0') && (mapchars[i] != 'E'))
-			if (mapchars[i] != 'P' && mapchars[i] != 'C')
-			{
-				free(mapchars);
-				errormessage();
-			}
+		if ((mapchars[i] != '1') && (mapchars[i] != '0'))
+			if (mapchars[i] != 'E')
+				if (mapchars[i] != 'P' && mapchars[i] != 'C')
+				{
+					free(mapchars);
+					errormessage();
+				}
 		i++;
 	}
 	if (player > 1)
@@ -40,25 +41,27 @@ void	validmaps(t_drgame *drgame, char *mapchars)
 	free(mapchars);
 }
 
-void	validotherwalls(t_drgame *drgame, char *line, int vergnl, char *mapchars)
+void	validotherwalls(t_drgame *dr, char *line, int vergnl, char *mapchars)
 {
 	while (vergnl > 0)
 	{
-		drgame->endl = ft_strlen(line) - 1;
-		if (line[0] != '1' || line[drgame->endl] != '1' || ((vergnl != 0) && (ft_strlen(line) != drgame->lnchars)))
+		dr->endl = ft_strlen(line) - 1;
+		if (line[0] != '1' || line[dr->endl] != '1')
+			errormessage();
+		if ((vergnl != 0) && (ft_strlen(line) != dr->lnchars))
 			errormessage();
 		ft_strcat(mapchars, line);
 		free(line);
 		line = 0;
-		vergnl = get_next_line(drgame->fd, &line);
-		drgame->linenum++;
+		vergnl = get_next_line(dr->fd, &line);
+		dr->linenum++;
 		if (vergnl == 0)
 		{
 			validwalls(line);
 			ft_strcat(mapchars, line);
 			free(line);
 			line = 0;
-			drgame->linenum++;
+			dr->linenum++;
 		}
 	}
 }

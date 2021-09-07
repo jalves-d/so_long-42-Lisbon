@@ -1,4 +1,4 @@
-# include "../includes/solong.h"
+#include "../includes/solong.h"
 
 int	windowsize(t_drgame *drgame)
 {
@@ -12,21 +12,21 @@ int	exitgame(t_drgame *drgame)
 	exit(1);
 }
 
-void	drgamedatas(t_drgame *drgame)
+void	drgamedatas(t_drgame *dr)
 {
-	drgame->mlx.mlx = mlx_init();
-	drgame->mlx.mlx_win = mlx_new_window(drgame->mlx.mlx, drgame->width, drgame->height, "Game name");
-	drgame->player = "./img/personagem.xpm";
-	drgame->exit = "./img/personagem.xpm";
-	drgame->sword = "./img/bau.xpm";
-	drgame->tree = "./img/piso.xpm";
-	drgame->ground = "./img/parede.xpm";
-	drgame->mlx.mlx_img = mlx_new_image(drgame->mlx.mlx, drgame->width, drgame->height);
-	drgame->numb = 0;
-	drgame->y = 0;
-	drgame->x = -40;
-	drgame->addr = NULL;
-	initmap(drgame);
+	dr->mlx.mlx = mlx_init();
+	dr->mlx.mlx_win = mlx_new_window(dr->mlx.mlx, dr->width, dr->height, "Game name");
+	dr->player = "./img/personagem.xpm";
+	dr->exit = "./img/personagem.xpm";
+	dr->sword = "./img/bau.xpm";
+	dr->tree = "./img/piso.xpm";
+	dr->ground = "./img/parede.xpm";
+	dr->mlx.mlx_img = mlx_new_image(dr->mlx.mlx, dr->width, dr->height);
+	dr->numb = 0;
+	dr->y = 0;
+	dr->x = -40;
+	dr->addr = NULL;
+	initmap(dr);
 }
 
 void	solong(int argc, char **argv, t_drgame *drgame)
@@ -36,8 +36,11 @@ void	solong(int argc, char **argv, t_drgame *drgame)
 	sizename = ft_strlen(argv[1]);
 	if (argc < 3)
 	{
-		if (argv[1][sizename - 1] == 'r' && argv[1][sizename - 2] == 'e' && argv[1][sizename - 3] == 'b' && argv[1][sizename - 4] == '.')
-			validmap(argv[1], drgame);
+		if (argv[1][sizename - 1] == 'r' && argv[1][sizename - 2] == 'e')
+		{
+			if (argv[1][sizename - 3] == 'b' && argv[1][sizename - 4] == '.')
+				validmap(argv[1], drgame);
+		}
 		else
 		{
 			write(1, "Error \n", 8);

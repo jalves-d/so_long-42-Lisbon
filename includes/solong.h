@@ -49,8 +49,9 @@ typedef struct s_drgame
 # define D 2
 # define ESC 53
 
+int	havec(t_drgame *drgame);
 void	solong(int argc, char **argv, t_drgame *drgame);
-void	drgamedatas(t_drgame *drgame);
+void	drgamedatas(t_drgame *dr);
 int	windowsize(t_drgame *drgame);
 char	*ft_strchr(const char *str, int c);
 size_t	ft_strlcpy(char *dest, char *src, size_t size);
@@ -60,8 +61,8 @@ void	ft_putchar_fd(char c, int fd);
 int	exitgame(t_drgame *drgame);
 void	moved(int key, t_drgame	*drgame, int pos);
 void	movea(int key, t_drgame	*drgame, int pos);
-void	movew(int key, t_drgame *drgame);
-void	moves(int key, t_drgame *drgame, int pos);
+void	movew(int key, t_drgame *dr);
+void	moves(int key, t_drgame *dr, int pos);
 int	key_hook(int key, t_drgame *drgame);
 void	errormessage();
 void	drawmapitens(t_drgame *drgame, int x, int y, int z);

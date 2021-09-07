@@ -1,25 +1,11 @@
 #include "../includes/solong.h"
 
-int	havec(t_drgame *drgame)
-{
-	int	i;
-
-	i = 0;
-	while (drgame->map[i])
-	{
-		if (drgame->map[i] == 'C')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void	moved(int key, t_drgame	*drgame, int pos)
 {
 	if (key == D)
 	{
 		if (drgame->map[pos + 1] == 'E' && !havec(drgame))
-		{	
+		{
 			drgame->map[pos + 1] = 'P';
 			drgame->map[pos] = '0';
 			exitgame(drgame);
@@ -54,51 +40,51 @@ void	movea(int key, t_drgame	*drgame, int pos)
 		moved(key, drgame, pos);
 }
 
-void	moves(int key, t_drgame *drgame, int pos)
+void	moves(int key, t_drgame *dr, int pos)
 {
 	if (key == S)
 	{
-		if (drgame->map[pos + drgame->lnchars] == 'E' && !havec(drgame))
+		if (dr->map[pos + dr->lnchars] == 'E' && !havec(dr))
 		{
-			drgame->map[pos + drgame->lnchars] = 'P';
-			drgame->map[pos] = '0';
-			exitgame(drgame);
+			dr->map[pos + dr->lnchars] = 'P';
+			dr->map[pos] = '0';
+			exitgame(dr);
 		}
-		else if (drgame->map[pos + drgame->lnchars] != '1' && drgame->map[pos + drgame->lnchars] != 'E')
+		else if (dr->map[pos + dr->lnchars] != '1' && dr->map[pos + dr->lnchars] != 'E')
 		{
-			drgame->map[pos] = '0';
-			drgame->lastitem = drgame->map[pos + drgame->lnchars];
-			drgame->map[pos + drgame->lnchars] = 'P';
+			dr->map[pos] = '0';
+			dr->lastitem = dr->map[pos + dr->lnchars];
+			dr->map[pos + dr->lnchars] = 'P';
 		}
 	}
 	else
-		movea(key, drgame, pos);
+		movea(key, dr, pos);
 }
 
-void	movew(int key, t_drgame *drgame)
+void	movew(int key, t_drgame *dr)
 {
 	int	pos;
 
 	pos = 0;
-	while (drgame->map[pos] != 'P')
+	while (dr->map[pos] != 'P')
 		pos++;
 	if (key == W)
 	{
-		if (drgame->map[pos - drgame->lnchars] == 'E' && !havec(drgame))
+		if (dr->map[pos - dr->lnchars] == 'E' && !havec(dr))
 		{
-			drgame->map[pos - drgame->lnchars] = 'P';
-			drgame->map[pos] = '0';
-			exitgame(drgame);
+			dr->map[pos - dr->lnchars] = 'P';
+			dr->map[pos] = '0';
+			exitgame(dr);
 		}
-		else if (drgame->map[pos - drgame->lnchars] != '1' && drgame->map[pos - drgame->lnchars] != 'E')
+		else if (dr->map[pos - dr->lnchars] != '1' && dr->map[pos - dr->lnchars] != 'E')
 		{
-			drgame->map[pos] = '0';
-			drgame->lastitem = drgame->map[pos - drgame->lnchars];
-			drgame->map[pos - drgame->lnchars] = 'P';
+			dr->map[pos] = '0';
+			dr->lastitem = dr->map[pos - dr->lnchars];
+			dr->map[pos - dr->lnchars] = 'P';
 		}
 	}
 	else
-		moves(key, drgame, pos);
+		moves(key, dr, pos);
 }
 
 int	key_hook(int key, t_drgame *drgame)
