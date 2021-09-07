@@ -16,7 +16,7 @@ int	havec(t_drgame *drgame)
 
 void	errormessage(void)
 {
-	write(1, "Error !\n", 8);
+	write(1, "Error !\nNot Expected!", 21);
 	exit(1);
 }
 

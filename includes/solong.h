@@ -31,7 +31,7 @@ typedef struct s_drgame
 	char	*tree;
 	char	*exit;
 	char	*map;
-	int 	lastitem;
+	int		lastitem;
 	int		lnchars;
 	int		linenum;
 	char	*player_position;
@@ -49,6 +49,7 @@ typedef struct s_drgame
 # define D 2
 # define ESC 53
 
+int	checkendl(t_drgame *drgame);
 int	havec(t_drgame *drgame);
 void	solong(int argc, char **argv, t_drgame *drgame);
 void	drgamedatas(t_drgame *dr);

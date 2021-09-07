@@ -37,6 +37,11 @@ void	validmaps(t_drgame *drgame, char *mapchars)
 	drgame->width = drgame->lnchars * 40;
 	drgame->map = malloc(sizeof(char) * (drgame->lnchars * drgame->linenum) + 1);
 	ft_strlcpy(drgame->map, mapchars, (drgame->linenum * drgame->lnchars));
+	if (checkendl(drgame))
+	{
+		free(drgame->map);
+		errormessage();
+	}
 	drgame->fd = close(drgame->fd);
 	free(mapchars);
 }
@@ -80,7 +85,7 @@ void	validwalls(char *line)
 		}
 		i++;
 	}
-}
+}	
 
 void	validmap(char *map, t_drgame *drgame)
 {
