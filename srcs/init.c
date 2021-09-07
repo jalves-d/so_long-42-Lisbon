@@ -48,18 +48,21 @@ void	initmap(t_drgame *drgame)
 {
 	int	init;
 
-	while (drgame->y < ((drgame->linenum - 1) * 40))
+	while (drgame->y < ((drgame->linenum) * 40))
 	{
 		init = 0;
 		while (init < drgame->lnchars)
 		{
-			if (drgame->map[init + drgame->numb] != '1')
+			if ((init + drgame->numb) < ft_strlen(drgame->map))
 			{
-				drgame->x += 40;
-				drawmapitens(drgame, drgame->x, drgame->y, init);
-			}
-			else
+				if (drgame->map[init + drgame->numb] != '1')
+				{
+					drgame->x += 40;
+					drawmapitens(drgame, drgame->x, drgame->y, init);
+				}
+				else
 				drawimgs(drgame, drgame->tree, drgame->x += 40, drgame->y);
+			}
 			init++;
 		}
 		drgame->x = -40;
