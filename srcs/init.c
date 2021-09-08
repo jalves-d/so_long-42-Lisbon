@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 16:03:56 by jalves-d          #+#    #+#             */
+/*   Updated: 2021/09/08 16:03:59 by jalves-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #	include "../includes/solong.h"
 
 int	havec(t_drgame *drgame)
@@ -32,16 +44,15 @@ void	drawmapitens(t_drgame *drgame, int x, int y, int z)
 		drawimgs(drgame, drgame->exit, x, y);
 }
 
-void	drawimgs(t_drgame *dr, char *imgname, int x, int y)
+void	drawimgs(t_drgame *dr, char *i, int x, int y)
 {
 	int	width;
 	int	height;
 
-	dr->addr = mlx_get_data_addr(dr->mlx.mlx_img, &dr->bpp, &dr->linenum, &dr->numexit);
-	dr->mlx.mlx_img = mlx_xpm_file_to_image(dr->mlx.mlx, imgname, &width, &height);
+	dr->mlx.mlx_img = mlx_xpm_file_to_image(dr->mlx.mlx, i, &width, &height);
 	if (!(dr->mlx.mlx_img))
 		write(2, "IMG Error !", 12);
-	mlx_put_image_to_window(dr->mlx.mlx, dr->mlx.mlx_win, dr->mlx.mlx_img, x, y);
+	mlx_put_image_to_window(dr->mlx.mlx, dr->mlx.win, dr->mlx.mlx_img, x, y);
 }
 
 void	initmap(t_drgame *drgame)
@@ -61,7 +72,7 @@ void	initmap(t_drgame *drgame)
 					drawmapitens(drgame, drgame->x, drgame->y, init);
 				}
 				else
-				drawimgs(drgame, drgame->tree, drgame->x += 40, drgame->y);
+					drawimgs(drgame, drgame->tree, drgame->x += 40, drgame->y);
 			}
 			init++;
 		}

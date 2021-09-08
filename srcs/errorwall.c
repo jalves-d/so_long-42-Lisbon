@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   errorwall.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 16:04:19 by jalves-d          #+#    #+#             */
+/*   Updated: 2021/09/08 16:04:30 by jalves-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #	include "../includes/solong.h"
 
 static size_t	ft_len(int n)
@@ -51,20 +63,23 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-void	ft_putnbr(int n, int fd)
+void	ft_putnbr(t_drgame *drgame)
 {
-	ft_putnbr_fd(n, fd);
+	drgame->move++;
+	ft_putnbr_fd(drgame->move, 1);
 	write(1, "\n", 1);
 }
 
 int	checkendl(t_drgame *drgame)
 {
-	int i;
+	int	i;
+	int	j;
 
 	i = 0;
+	j = ft_strlen(drgame->map);
 	while (i < drgame->lnchars)
 	{
-		if (drgame->map[ft_strlen(drgame->map) - drgame->lnchars + i - 1] != '1')
+		if (drgame->map[j - drgame->lnchars + i - 1] != '1')
 			return (1);
 		i++;
 	}

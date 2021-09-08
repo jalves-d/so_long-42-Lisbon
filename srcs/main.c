@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 16:03:42 by jalves-d          #+#    #+#             */
+/*   Updated: 2021/09/08 16:03:46 by jalves-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/solong.h"
 
 int	windowsize(t_drgame *drgame)
@@ -15,7 +27,7 @@ int	exitgame(t_drgame *drgame)
 void	drgamedatas(t_drgame *dr)
 {
 	dr->mlx.mlx = mlx_init();
-	dr->mlx.mlx_win = mlx_new_window(dr->mlx.mlx, dr->width, dr->height, "Game name");
+	dr->mlx.win = mlx_new_window(dr->mlx.mlx, dr->width, dr->height, "DIE");
 	dr->player = "./img/char.xpm";
 	dr->exit = "./img/door.xpm";
 	dr->sword = "./img/collect.xpm";
@@ -59,8 +71,8 @@ int	main(int argc, char **argv)
 	t_drgame	drgame;
 
 	solong(argc, argv, &drgame);
-	mlx_key_hook(drgame.mlx.mlx_win, key_hook, &drgame);
-	mlx_hook(drgame.mlx.mlx_win, 15, 1L << 16, windowsize, &drgame);
-	mlx_hook(drgame.mlx.mlx_win, 33, 1L << 5, exitgame, &drgame);
+	mlx_key_hook(drgame.mlx.win, key_hook, &drgame);
+	mlx_hook(drgame.mlx.win, 15, 1L << 16, windowsize, &drgame);
+	mlx_hook(drgame.mlx.win, 33, 1L << 5, exitgame, &drgame);
 	mlx_loop(drgame.mlx.mlx);
 }

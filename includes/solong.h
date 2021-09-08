@@ -11,7 +11,7 @@
 
 typedef struct s_mlx
 {
-	void	*mlx_win;
+	void	*win;
 	void	*mlx;
 	void	*mlx_img;
 
@@ -50,7 +50,7 @@ typedef struct s_drgame
 # define ESC 53
 
 char	*ft_itoa(int n);
-void	ft_putnbr(int n, int fd);
+void	ft_putnbr(t_drgame *dr);
 int	checkendl(t_drgame *drgame);
 int	havec(t_drgame *drgame);
 void	solong(int argc, char **argv, t_drgame *drgame);
@@ -64,12 +64,12 @@ void	ft_putchar_fd(char c, int fd);
 int	exitgame(t_drgame *drgame);
 void	moved(int key, t_drgame	*drgame, int pos);
 void	movea(int key, t_drgame	*drgame, int pos);
-void	movew(int key, t_drgame *dr);
+void	movew(int pos, int key, t_drgame *dr);
 void	moves(int key, t_drgame *dr, int pos);
 int	key_hook(int key, t_drgame *drgame);
 void	errormessage();
 void	drawmapitens(t_drgame *drgame, int x, int y, int z);
-void	drawimgs(t_drgame *drgame, char *imgname, int x, int y);
+void	drawimgs(t_drgame *drgame, char *i, int x, int y);
 void	initmap(t_drgame *drgame);
 void	validmapitens(char *mapchars);
 void	validmaps(t_drgame *drgame, char *mapchars);

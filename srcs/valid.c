@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   valid.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jalves-d <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/09/08 16:03:29 by jalves-d          #+#    #+#             */
+/*   Updated: 2021/09/08 16:03:35 by jalves-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/solong.h"
 
 void	validmapitens(char *mapchars)
@@ -12,12 +24,16 @@ void	validmapitens(char *mapchars)
 		if (mapchars[i] == 'P')
 			player++;
 		if ((mapchars[i] != '1') && (mapchars[i] != '0'))
+		{
 			if (mapchars[i] != 'E')
+			{
 				if (mapchars[i] != 'P' && mapchars[i] != 'C')
 				{
 					free(mapchars);
 					errormessage();
 				}
+			}
+		}
 		i++;
 	}
 	if (player > 1)
@@ -26,6 +42,8 @@ void	validmapitens(char *mapchars)
 
 void	validmaps(t_drgame *drgame, char *mapchars)
 {
+	int	i;
+
 	if (!(ft_strchr(mapchars, 'P')) || !(ft_strchr(mapchars, 'E')))
 		errormessage();
 	if (drgame->linenum - 1 == drgame->lnchars || !(ft_strchr(mapchars, 'C')))
@@ -35,7 +53,8 @@ void	validmaps(t_drgame *drgame, char *mapchars)
 	drgame->move = 0;
 	drgame->height = (drgame->linenum - 1) * 40;
 	drgame->width = drgame->lnchars * 40;
-	drgame->map = malloc(sizeof(char) * (drgame->lnchars * drgame->linenum) + 1);
+	i = drgame->lnchars;
+	drgame->map = malloc(sizeof(char) * (i * drgame->linenum) + 1);
 	ft_strlcpy(drgame->map, mapchars, (drgame->linenum * drgame->lnchars));
 	if (checkendl(drgame))
 	{
