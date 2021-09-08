@@ -19,8 +19,8 @@ void	drgamedatas(t_drgame *dr)
 	dr->player = "./img/char.xpm";
 	dr->exit = "./img/door.xpm";
 	dr->sword = "./img/collect.xpm";
-	dr->tree = "./img/ground.xpm";
-	dr->ground = "./img/block.xpm";
+	dr->tree = "./img/block.xpm";
+	dr->ground = "./img/ground.xpm";
 	dr->mlx.mlx_img = mlx_new_image(dr->mlx.mlx, dr->width, dr->height);
 	dr->numb = 0;
 	dr->y = 0;

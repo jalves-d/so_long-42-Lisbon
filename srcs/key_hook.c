@@ -116,5 +116,6 @@ int	key_hook(int key, t_drgame *drgame)
 	drgame->numb = 0;
 	drgame->addr = NULL;
 	initmap(drgame);
+	mlx_string_put(drgame->mlx.mlx, drgame->mlx.mlx_win, 10, 10, 0xFFFFFF, ft_itoa(drgame->move));
 	return (1);
 }

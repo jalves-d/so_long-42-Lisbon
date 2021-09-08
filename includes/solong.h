@@ -49,6 +49,7 @@ typedef struct s_drgame
 # define D 2
 # define ESC 53
 
+char	*ft_itoa(int n);
 void	ft_putnbr(int n, int fd);
 int	checkendl(t_drgame *drgame);
 int	havec(t_drgame *drgame);
