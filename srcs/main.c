@@ -16,11 +16,11 @@ void	drgamedatas(t_drgame *dr)
 {
 	dr->mlx.mlx = mlx_init();
 	dr->mlx.mlx_win = mlx_new_window(dr->mlx.mlx, dr->width, dr->height, "Game name");
-	dr->player = "./img/personagem.xpm";
-	dr->exit = "./img/personagem.xpm";
-	dr->sword = "./img/bau.xpm";
-	dr->tree = "./img/piso.xpm";
-	dr->ground = "./img/parede.xpm";
+	dr->player = "./img/char.xpm";
+	dr->exit = "./img/door.xpm";
+	dr->sword = "./img/collect.xpm";
+	dr->tree = "./img/ground.xpm";
+	dr->ground = "./img/block.xpm";
 	dr->mlx.mlx_img = mlx_new_image(dr->mlx.mlx, dr->width, dr->height);
 	dr->numb = 0;
 	dr->y = 0;
